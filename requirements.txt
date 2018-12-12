@@ -1,0 +1,7 @@
+-i https://pypi.org/simple
+cffi==1.11.5
+ijson==2.3
+pycparser==2.19
+rtree==0.8.3
+shapely==1.7a1
+simplejson==3.16.0
