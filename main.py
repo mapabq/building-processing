@@ -47,7 +47,7 @@ def building_block_intersection(overlaps_candidates: Generator) -> Generator:
                     shape(candidate[0]["geometry"])
                 )
             except TopologicalError:
-                pass
+                continue
             if intersect:
                 buildings.append(building)
         if len(buildings):
@@ -126,18 +126,21 @@ def main():
             "features": [\n"""
         print("writing tract files")
         for block in ms_blocks:
+            for building in block[1]:
+                building["properties"] = {"building": "yes"}
+            buildings = [json.dumps(building) for building in block[1]]
             filename = f"./out/tract_{block[0]}.geojson"
             if Path(filename).is_file():
                 with open(filename, "a+") as f:
-                    for building in block[1]:
-                        building["properties"] = {"building": "yes"}
-                        f.write(json.dumps(building))
+                    data = f.read()
+                    for building in buildings:
+                        f.write(building)
                         f.write(",")
             else:
                 with open(filename, "w") as f:
                     f.write(geojson)
-                    for building in block[1]:
-                        f.write(json.dumps(building))
+                    for building in buildings:
+                        f.write(building)
                         f.write(",")
         files = [path for path in Path("./out").iterdir()]
         for item in files:
@@ -148,7 +151,17 @@ def main():
             with item.open(mode="wb") as f:
                 content += b"]\n}"
                 f.write(content)
-
+        for item in files:
+            with item.open(mode="r+") as f:
+                data = f.read()
+                json_data = json.loads(data)
+                features = json_data["features"]
+                buildings = list(set([json.dumps(building) for building in features]))
+                deduped = [json.loads(building) for building in buildings]
+                json_data["features"] = deduped
+                f.seek(0)
+                f.write(json.dumps(json_data))
+                f.truncate()
 
 if __name__ == "__main__":
     main()
