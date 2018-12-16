@@ -99,7 +99,12 @@ def bbox_filter(in_gen: Generator, bbox: Tuple[float, float]) -> Generator:
             yield item
 
 
-BBOX = (-106.79191589355469, 34.9805024453652, -106.41426086425781, 35.28878715881986)
+BBOX = (
+    -106.791_915_893_554_69,
+    34.980_502_445_365_2,
+    -106.414_260_864_257_81,
+    35.288_787_158_819_86,
+)
 
 
 def main():
@@ -162,6 +167,7 @@ def main():
                 f.seek(0)
                 f.write(json.dumps(json_data))
                 f.truncate()
+
 
 if __name__ == "__main__":
     main()
