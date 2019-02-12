@@ -6,7 +6,7 @@ a Python >=3.6 script for processing Microsoft buildings footprints for bulk imp
 
 ### Methodology
 
-Buildings are grouped in census tracts by census blocks if the census block does not already contain OpenStreetMap user contributions of buildings where ``` building="yes" ``` (as of September 2018). Current OSM building data is held in the [abq_building.geojson](./data/abq_building.geojson) file. Census blocks are held in the [blocks_wgs84.geojson](./data/blocks_wgs84.geojson) file. The Microsoft building footprint data for New Mexico can be downloaded [here](https://usbuildingdata.blob.core.windows.net/usbuildings-v1-1/NewMexico.zip). 
+Buildings are grouped in census tracts by census blocks if the census block does not already contain OpenStreetMap user contributions of buildings where ``` building="yes" ``` (as of February 11 2019). Current OSM building data is held in the [abq_building.geojson](./data/abq_building.geojson) file. Census blocks are held in the [blocks_wgs84.geojson](./data/blocks_wgs84.geojson) file. The Microsoft building footprint data for New Mexico can be downloaded [here](https://usbuildingdata.blob.core.windows.net/usbuildings-v1-1/NewMexico.zip). 
 
 
 ### C/C++ dependencies
